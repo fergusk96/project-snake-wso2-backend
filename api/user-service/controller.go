@@ -19,7 +19,7 @@ func NewController(
 	service Service,
 ) network.Controller {
 	return &controller{
-		BaseController: network.NewBaseController("/sample", authProvider, authorizeMFunc),
+		BaseController: network.NewBaseController("/users", authProvider, authorizeMFunc),
 		service:        service,
 	}
 }
