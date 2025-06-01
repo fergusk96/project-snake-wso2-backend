@@ -4,17 +4,17 @@ import (
 	"context"
 	"time"
 
+	"github.com/fergusk96/wso2-user-service/config"
 	"github.com/gin-gonic/gin"
 	"github.com/unusualcodeorg/goserve/arch/mongo"
 	"github.com/unusualcodeorg/goserve/arch/network"
 	"github.com/unusualcodeorg/goserve/arch/redis"
-	"github.com/fergusk96/wso2-user-service/config"
 )
 
 type Shutdown = func()
 
 func Server() {
-	env := config.NewEnv(".env", true)
+	env := config.NewEnv("../.env", true)
 	router, _, shutdown := create(env)
 	defer shutdown()
 	router.Start(env.ServerHost, env.ServerPort)

@@ -3,8 +3,8 @@ package startup
 import (
 	"net/http/httptest"
 
-	"github.com/unusualcodeorg/goserve/arch/network"
 	"github.com/fergusk96/wso2-user-service/config"
+	"github.com/unusualcodeorg/goserve/arch/network"
 )
 
 type Teardown = func()

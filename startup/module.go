@@ -3,12 +3,13 @@ package startup
 import (
 	"context"
 
+	"github.com/fergusk96/wso2-user-service/api/middleware"
+	"github.com/fergusk96/wso2-user-service/api/sample"
+	"github.com/fergusk96/wso2-user-service/config"
 	coreMW "github.com/unusualcodeorg/goserve/arch/middleware"
 	"github.com/unusualcodeorg/goserve/arch/mongo"
 	"github.com/unusualcodeorg/goserve/arch/network"
 	"github.com/unusualcodeorg/goserve/arch/redis"
-	"github.com/fergusk96/wso2-user-service/api/sample"
-	"github.com/fergusk96/wso2-user-service/config"
 )
 
 type Module network.Module[module]
@@ -26,7 +27,7 @@ func (m *module) GetInstance() *module {
 
 func (m *module) Controllers() []network.Controller {
 	return []network.Controller{
-		sample.NewController(m.AuthenticationProvider(), m.AuthorizationProvider(), sample.NewService(m.DB, m.Store)),
+		sample.NewController(m.AuthenticationProvider(), m.AuthorizationProvider(), sample.NewService(m.DB, m.Store), sample.NewUserService(m.DB, m.Store)),
 	}
 }
 
@@ -34,6 +35,7 @@ func (m *module) RootMiddlewares() []network.RootMiddleware {
 	return []network.RootMiddleware{
 		coreMW.NewErrorCatcher(),
 		coreMW.NewNotFound(),
+		middleware.NewJwtMiddleware(),
 	}
 }
 

@@ -1,8 +1,8 @@
 package startup
 
 import (
-	"github.com/unusualcodeorg/goserve/arch/mongo"
 	sampleModel "github.com/fergusk96/wso2-user-service/api/sample/model"
+	"github.com/unusualcodeorg/goserve/arch/mongo"
 )
 
 func EnsureDbIndexes(db mongo.Database) {

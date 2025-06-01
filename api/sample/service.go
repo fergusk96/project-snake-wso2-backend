@@ -1,7 +1,7 @@
 package sample
 
 import (
-  "github.com/fergusk96/wso2-user-service/api/sample/dto"
+	"github.com/fergusk96/wso2-user-service/api/sample/dto"
 	"github.com/fergusk96/wso2-user-service/api/sample/model"
 	"github.com/unusualcodeorg/goserve/arch/mongo"
 	"github.com/unusualcodeorg/goserve/arch/network"
@@ -22,9 +22,9 @@ type service struct {
 
 func NewService(db mongo.Database, store redis.Store) Service {
 	return &service{
-		BaseService:  network.NewBaseService(),
+		BaseService:        network.NewBaseService(),
 		sampleQueryBuilder: mongo.NewQueryBuilder[model.Sample](db, model.CollectionName),
-		infoSampleCache: redis.NewCache[dto.InfoSample](store),
+		infoSampleCache:    redis.NewCache[dto.InfoSample](store),
 	}
 }
 

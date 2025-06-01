@@ -37,4 +37,5 @@ keys/*
 __debug*
 
 build
- 
+.vscode/launch.json
+.vscode/settings.json

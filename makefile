@@ -22,3 +22,6 @@ setup:
 # make apigen ARGS="sample"
 apigen:
 	go run .tools/apigen.go $(ARGS)	
+
+fmt:
+	go fmt ./...

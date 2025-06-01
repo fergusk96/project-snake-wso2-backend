@@ -1,36 +1,49 @@
 package sample
 
 import (
-	"github.com/gin-gonic/gin"
 	"github.com/fergusk96/wso2-user-service/api/sample/dto"
+	"github.com/fergusk96/wso2-user-service/utils"
+	"github.com/gin-gonic/gin"
 	coredto "github.com/unusualcodeorg/goserve/arch/dto"
 	"github.com/unusualcodeorg/goserve/arch/network"
-	"github.com/fergusk96/wso2-user-service/utils"
 )
 
 type controller struct {
 	network.BaseController
-	service Service
+	service     Service
+	userService UserService
 }
 
 func NewController(
 	authProvider network.AuthenticationProvider,
 	authorizeMFunc network.AuthorizationProvider,
 	service Service,
+	userService UserService,
 ) network.Controller {
 	return &controller{
 		BaseController: network.NewBaseController("/sample", authProvider, authorizeMFunc),
 		service:        service,
+		userService:    userService,
 	}
 }
 
 func (c *controller) MountRoutes(group *gin.RouterGroup) {
-group.GET("/ping", c.getPingHandler)
-group.GET("/id/:id", c.getSampleHandler)
+	group.GET("/ping", c.getPingHandler)
+	group.GET("/id/:id", c.getSampleHandler)
+	group.GET("getUser/:id", c.getUser)
 }
 
 func (c *controller) getPingHandler(ctx *gin.Context) {
 	c.Send(ctx).SuccessMsgResponse("pong!")
+}
+
+func (c *controller) getUser(ctx *gin.Context) {
+	user, err := c.userService.FindUser("12345")
+	if err != nil {
+		c.Send(ctx).InternalServerError("failed to find user", err)
+		return
+	}
+	c.Send(ctx).SuccessDataResponse("success", user)
 }
 
 func (c *controller) getSampleHandler(ctx *gin.Context) {

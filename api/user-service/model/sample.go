@@ -53,7 +53,6 @@ func (*Sample) EnsureIndexes(db mongo.Database) {
 			},
 		},
 	}
-	
+
 	mongo.NewQueryBuilder[Sample](db, CollectionName).Query(context.Background()).CreateIndexes(indexes)
 }
-
