@@ -14,13 +14,13 @@ type controller struct {
 }
 
 func NewController(
-	 network.AuthenticationProvider,
+	authProvider network.AuthenticationProvider,
 	authorizeMFunc network.AuthorizationProvider,
 	service Service,
 ) network.Controller {
 	return &controller{
-		BaseController: network.NewBaseController("/sample", , authorizeMFunc),
-		service:  service,
+		BaseController: network.NewBaseController("/sample", authProvider, authorizeMFunc),
+		service:        service,
 	}
 }
 
