@@ -29,9 +29,9 @@ type Env struct {
 	RSAPrivateKeyPath string `mapstructure:"RSA_PRIVATE_KEY_PATH"`
 	RSAPublicKeyPath  string `mapstructure:"RSA_PUBLIC_KEY_PATH"`
 	// Clients
-	JWKSURL string `mapstructure:"JWKS_URL"`
-	WSO2HOST string `mapstructure:"WSO2_HOST"`
-	WSO2ClientID string `mapstructure:"WSO2_CLIENT_ID"`
+	JWKSURL          string `mapstructure:"JWKS_URL"`
+	WSO2HOST         string `mapstructure:"WSO2_HOST"`
+	WSO2ClientID     string `mapstructure:"WSO2_CLIENT_ID"`
 	WSO2ClientSecret string `mapstructure:"WSO2_CLIENT_SECRET"`
 	// Token
 	AccessTokenValiditySec  uint64 `mapstructure:"ACCESS_TOKEN_VALIDITY_SEC"`
