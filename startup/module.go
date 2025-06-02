@@ -6,6 +6,7 @@ import (
 	"github.com/fergusk96/wso2-user-service/api/middleware"
 	"github.com/fergusk96/wso2-user-service/api/sample"
 	"github.com/fergusk96/wso2-user-service/config"
+	"github.com/fergusk96/wso2-user-service/utils"
 	coreMW "github.com/unusualcodeorg/goserve/arch/middleware"
 	"github.com/unusualcodeorg/goserve/arch/mongo"
 	"github.com/unusualcodeorg/goserve/arch/network"
@@ -27,7 +28,11 @@ func (m *module) GetInstance() *module {
 
 func (m *module) Controllers() []network.Controller {
 	return []network.Controller{
-		sample.NewController(m.AuthenticationProvider(), m.AuthorizationProvider(), sample.NewService(m.DB, m.Store), sample.NewUserService(m.DB, m.Store)),
+		sample.NewController(m.AuthenticationProvider(),
+			m.AuthorizationProvider(),
+			sample.NewService(m.DB, m.Store),
+			sample.NewUserService(
+				utils.NewWSO2Client(m.Env.WSO2HOST, m.Env.WSO2ClientID, m.Env.WSO2ClientSecret))),
 	}
 }
 

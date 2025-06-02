@@ -30,7 +30,7 @@ func NewController(
 func (c *controller) MountRoutes(group *gin.RouterGroup) {
 	group.GET("/ping", c.getPingHandler)
 	group.GET("/id/:id", c.getSampleHandler)
-	group.GET("getUser/:id", c.getUser)
+	group.GET("user/", c.getUser)
 }
 
 func (c *controller) getPingHandler(ctx *gin.Context) {
@@ -38,7 +38,18 @@ func (c *controller) getPingHandler(ctx *gin.Context) {
 }
 
 func (c *controller) getUser(ctx *gin.Context) {
-	user, err := c.userService.FindUser("12345")
+	sub, exists := ctx.Get("sub")
+	if !exists {
+		c.Send(ctx).UnauthorizedError("missing sub claim in context", nil)
+		return
+	}
+
+	userID, ok := sub.(string)
+	if !ok {
+		c.Send(ctx).InternalServerError("invalid sub claim type", nil)
+		return
+	}
+	user, err := c.userService.FindUser(userID)
 	if err != nil {
 		c.Send(ctx).InternalServerError("failed to find user", err)
 		return

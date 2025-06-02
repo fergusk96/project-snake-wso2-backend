@@ -1,26 +1,31 @@
 package sample
 
 import (
-	"github.com/unusualcodeorg/goserve/arch/mongo"
-	"github.com/unusualcodeorg/goserve/arch/network"
-	"github.com/unusualcodeorg/goserve/arch/redis"
+    "github.com/fergusk96/wso2-user-service/utils"
 )
 
 type UserService interface {
-	FindUser(id string) (string, error)
+    FindUser(id string) (string, error)
 }
 
 type userService struct {
-	network.BaseService
+    wso2Client *utils.WSO2Client
 }
 
-func NewUserService(db mongo.Database, store redis.Store) UserService {
-	return &userService{
-		BaseService: network.NewBaseService(),
-	}
+func NewUserService(wso2Client *utils.WSO2Client) UserService {
+    return &userService{
+        wso2Client: wso2Client,
+    }
 }
 
 func (s *userService) FindUser(id string) (string, error) {
+    // Use the WSO2 client to make a request
+    resp, err := s.wso2Client.GetUser(id)
+    if err != nil {
+        return "", err
+    }
+    defer resp.Body.Close()
 
-	return "hello world", nil
+    // Process the response (example)
+    return "User found", nil
 }
