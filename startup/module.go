@@ -32,7 +32,7 @@ func (m *module) Controllers() []network.Controller {
 			m.AuthorizationProvider(),
 			sample.NewService(m.DB, m.Store),
 			sample.NewUserService(
-				utils.NewWSO2Client(m.Env.WSO2HOST, m.Env.WSO2ClientID, m.Env.WSO2ClientSecret))),
+				utils.NewWSO2Client(m.Env.KINDEHOST, m.Env.KINDEClientID, m.Env.KINDEClientSecret))),
 	}
 }
 

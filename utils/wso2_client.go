@@ -5,20 +5,10 @@ import (
 	"net/http"
 )
 
-type WSOClient interface {
-	GetUser(userId string) (*http.Response, error)
-}
-
-type WSO2Client struct {
-	Client       *http.Client
-	Host         string
-	ClientID     string
-	ClientSecret string
-}
 
 // NewWSO2Client initializes a new WSO2Client with the host from the environment
-func NewWSO2Client(host, clientId, clientSecret string) *WSO2Client {
-	return &WSO2Client{
+func NewWSO2Client(host, clientId, clientSecret string) *UserManagerClient {
+	return &UserManagerClient{
 		Client:       &http.Client{}, // You can configure timeouts or other settings here
 		Host:         host,
 		ClientID:     clientId,
@@ -27,7 +17,7 @@ func NewWSO2Client(host, clientId, clientSecret string) *WSO2Client {
 }
 
 // Get sends a GET request to the specified endpoint
-func (c *WSO2Client) GetUser(userId string) (*http.Response, error) {
+func (c *UserManagerClient) GetWSO2User(userId string) (*http.Response, error) {
 	// Construct the full URL
 	url := c.Host + "/scim2/Users/" + userId
 

@@ -9,18 +9,18 @@ type UserService interface {
 }
 
 type userService struct {
-	wso2Client *utils.WSO2Client
+	userClient *utils.UserManagerClient
 }
 
-func NewUserService(wso2Client *utils.WSO2Client) UserService {
+func NewUserService(wso2Client *utils.UserManagerClient) UserService {
 	return &userService{
-		wso2Client: wso2Client,
+		userClient: wso2Client,
 	}
 }
 
 func (s *userService) FindUser(id string) (string, error) {
 	// Use the WSO2 client to make a request
-	resp, err := s.wso2Client.GetUser(id)
+	resp, err := s.userClient.GetKindeUser(id)
 	if err != nil {
 		return "", err
 	}

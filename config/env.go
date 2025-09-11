@@ -33,6 +33,9 @@ type Env struct {
 	WSO2HOST         string `mapstructure:"WSO2_HOST"`
 	WSO2ClientID     string `mapstructure:"WSO2_CLIENT_ID"`
 	WSO2ClientSecret string `mapstructure:"WSO2_CLIENT_SECRET"`
+	KINDEHOST         string `mapstructure:"KINDE_HOST"`
+	KINDEClientID     string `mapstructure:"KINDE_CLIENT_ID"`
+	KINDEClientSecret string `mapstructure:"KINDE_CLIENT_SECRET"`
 	// Token
 	AccessTokenValiditySec  uint64 `mapstructure:"ACCESS_TOKEN_VALIDITY_SEC"`
 	RefreshTokenValiditySec uint64 `mapstructure:"REFRESH_TOKEN_VALIDITY_SEC"`
