@@ -1,0 +1,20 @@
+#Thu Sep 11 23:59:00 CEST 2025
+micronaut:
+  application:
+    name: project-snake-backend
+  http:
+    services:
+      user-service-client:
+        url: https://auth.project-snake.win
+      oauth-client:
+        url: https://auth.project-snake.win
+  jwt:
+    jwk:
+      url: https://auth.project-snake.win
+      issuer: "https://auth.project-snake.win"
+
+kinde:
+  client-url: ${KINDE_HOST}
+  client-id: ${KINDE_CLIENT_ID}
+  client-secret: ${KINDE_CLIENT_SECRET}
+  audience: ${TOKEN_AUDIENCE}
