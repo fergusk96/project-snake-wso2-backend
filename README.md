@@ -1,21 +1,24 @@
-## Micronaut 4.9.3 Documentation
+# Project Snake Backend
 
-- [User Guide](https://docs.micronaut.io/4.9.3/guide/index.html)
-- [API Reference](https://docs.micronaut.io/4.9.3/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/4.9.3/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
----
+This is a Micronaut-based backend for the mobile game codenamed **Project Snake**.
 
-- [Shadow Gradle Plugin](https://gradleup.com/shadow/)
-- [Micronaut Gradle Plugin documentation](https://micronaut-projects.github.io/micronaut-gradle-plugin/latest/)
-- [GraalVM Gradle Plugin documentation](https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html)
-## Feature micronaut-aot documentation
+## Features
 
-- [Micronaut AOT documentation](https://micronaut-projects.github.io/micronaut-aot/latest/guide/)
+- RESTful API for game services
+- MongoDB for persistent storage
+- Redis for caching and performance
 
+## Tech Stack
 
-## Feature serialization-jackson documentation
+- Micronaut 4
+- Java 17
+- MongoDB
+- Redis
+- Gradle
 
-- [Micronaut Serialization Jackson Core documentation](https://micronaut-projects.github.io/micronaut-serialization/latest/guide/)
+## Usage
 
+Build and run with Docker Compose:
 
+```sh
+docker compose up --build
