@@ -1,46 +1,13 @@
-services:
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: api
-    container_name: api
-    restart: unless-stopped
-    env_file: .env
-    ports:
-      - '${SERVER_PORT}:8080'
-    depends_on:
-      - mongo
-      - redis
+FROM gradle:8.7-jdk17 AS builder
 
-  mongo:
-    image: mongo:7.0.12
-    container_name: mongo
-    restart: unless-stopped
-    env_file: .env
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=${DB_ADMIN}
-      - MONGO_INITDB_ROOT_PASSWORD=${DB_ADMIN_PWD}
-      - MONGO_INITDB_DATABASE=${DB_NAME}
-    ports:
-      - '${DB_PORT}:27017'
-    command: mongod --bind_ip_all
-    volumes:
-      - ./.extra/setup/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-      - dbdata:/data/db
+WORKDIR /app
+COPY . .
+RUN gradle build --no-daemon
 
-  redis:
-    image: redis:7.2.5
-    container_name: redis
-    restart: unless-stopped
-    env_file: .env
-    ports:
-      - '${REDIS_PORT}:6379'
-    command: redis-server --bind localhost --bind 0.0.0.0 --save 20 1 --loglevel warning --requirepass ${REDIS_PASSWORD}
-    volumes:
-      - cache:/data/cache
+FROM eclipse-temurin:17-jre
 
-volumes:
-  dbdata:
-  cache:
-    driver: local
+WORKDIR /app
+COPY --from=builder /app/build/libs/*-all.jar app.jar
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
