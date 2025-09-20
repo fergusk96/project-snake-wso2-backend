@@ -1,4 +1,4 @@
-package project.snake.backend.auth.inbound.exception;
+package project.snake.backend.core.auth.inbound.exception;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import io.micronaut.http.HttpResponse;

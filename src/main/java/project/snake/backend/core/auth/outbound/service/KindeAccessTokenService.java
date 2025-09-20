@@ -1,4 +1,4 @@
-package project.snake.backend.auth.outbound.service;
+package project.snake.backend.core.auth.outbound.service;
 
 import io.micronaut.context.annotation.Value;
 import io.micronaut.http.annotation.Body;

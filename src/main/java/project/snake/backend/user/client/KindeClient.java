@@ -1,11 +1,11 @@
-package project.snake.backend.client;
+package project.snake.backend.user.client;
 
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.QueryValue;
 import io.micronaut.http.client.annotation.Client;
 import java.util.Optional;
 import lombok.NonNull;
-import project.snake.backend.dto.KindeUserDto;
+import project.snake.backend.user.dto.KindeUserDto;
 
 @Client(value = "user-service-client")
 public interface KindeClient {

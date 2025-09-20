@@ -1,4 +1,4 @@
-package project.snake.backend.auth.inbound.filter;
+package project.snake.backend.core.auth.inbound.filter;
 
 
 import com.auth0.jwk.Jwk;

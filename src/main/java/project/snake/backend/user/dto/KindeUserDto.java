@@ -1,8 +1,7 @@
-package project.snake.backend.dto;
+package project.snake.backend.user.dto;
 
 import io.micronaut.core.annotation.Introspected;
 import io.micronaut.serde.annotation.Serdeable;
-import io.micronaut.serde.config.naming.PropertyNamingStrategy;
 import io.micronaut.serde.config.naming.SnakeCaseStrategy;
 
 @Introspected

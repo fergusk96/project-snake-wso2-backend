@@ -1,4 +1,4 @@
-package project.snake.backend.auth.outbound.service;
+package project.snake.backend.core.auth.outbound.service;
 
 public interface AccessTokenService {
 

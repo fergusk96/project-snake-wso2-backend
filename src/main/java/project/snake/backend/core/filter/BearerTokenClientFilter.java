@@ -1,16 +1,15 @@
-package project.snake.backend.client.filter;
+package project.snake.backend.core.filter;
 
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MutableHttpRequest;
 import io.micronaut.http.annotation.Filter;
-import io.micronaut.http.client.HttpClient;
 import io.micronaut.http.filter.ClientFilterChain;
 import io.micronaut.http.filter.HttpClientFilter;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
 import jakarta.inject.Singleton;
 import org.reactivestreams.Publisher;
-import project.snake.backend.auth.outbound.service.AccessTokenService;
+import project.snake.backend.core.auth.outbound.service.AccessTokenService;
 
 @Filter("/api/v1/**")
 @Singleton

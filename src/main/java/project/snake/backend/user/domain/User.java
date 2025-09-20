@@ -1,4 +1,4 @@
-package project.snake.backend.domain;
+package project.snake.backend.user.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
