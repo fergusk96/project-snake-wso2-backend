@@ -1,4 +1,4 @@
-package project.snake.backend.core.mapper;
+package project.snake.backend.user.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

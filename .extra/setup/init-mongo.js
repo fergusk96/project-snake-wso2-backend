@@ -8,4 +8,3 @@ function seed(dbName, user, password) {
 }
 
 seed("dev-db", "dev-db-user", "changeit");
-seed("test-db", "test-db-user", "changeit");

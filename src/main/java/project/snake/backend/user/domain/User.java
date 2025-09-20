@@ -1,10 +1,13 @@
 package project.snake.backend.user.domain;
 
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 public class User {
@@ -17,4 +20,5 @@ public class User {
   private final String firstName;
   private final boolean isSuspended;
   private final String picture;
+  private Map<String, Object> addtionalProperties;
 }
