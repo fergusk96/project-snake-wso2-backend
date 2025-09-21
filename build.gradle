@@ -13,10 +13,14 @@ repositories {
 }
 
 dependencies {
+    annotationProcessor("org.projectlombok:lombok")
     annotationProcessor("io.micronaut:micronaut-http-validation")
     annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
     annotationProcessor("io.micronaut.openapi:micronaut-openapi")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
+    annotationProcessor("io.micronaut.data:micronaut-data-document-processor")
+    implementation("io.micronaut.data:micronaut-data-mongodb")
+    implementation("org.mongodb:mongodb-driver-sync")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("com.auth0:jwks-rsa:0.23.0")
     implementation("com.auth0:java-jwt:4.5.0")

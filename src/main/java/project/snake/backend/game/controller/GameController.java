@@ -14,7 +14,9 @@ import jakarta.inject.Singleton;
 import lombok.Getter;
 import lombok.Setter;
 import project.snake.backend.game.mapper.GameMapper;
+import project.snake.backend.game.response.GameHistoryResponse;
 import project.snake.backend.game.service.GameExecutionService;
+import project.snake.backend.game.service.GameService;
 import project.snake.backend.user.service.UserService;
 
 @Singleton
@@ -26,13 +28,16 @@ public class GameController {
 
   private final UserService userService;
   private final GameExecutionService gameExecutionService;
+  private final GameService gameService;
   private final GameMapper gameMapper;
 
   @Inject
   public GameController(UserService userService, final GameExecutionService gameExecutionService,
+                        final GameService gameService,
                         final GameMapper gameMapper) {
     this.userService = userService;
     this.gameExecutionService = gameExecutionService;
+    this.gameService = gameService;
     this.gameMapper = gameMapper;
   }
 
@@ -41,5 +46,16 @@ public class GameController {
   public HttpResponse<?> executeGame(@RequestAttribute("userId") String userId) {
     var gameResult = gameMapper.toGameResultResponse(gameExecutionService.executeGame(userId));
     return HttpResponse.ok(gameResult);
+  }
+
+  @Get("/history")
+  @Operation(summary = "Get game history for user", description = "Returns lists of wins and losses for the given user ID")
+  public HttpResponse<?> getGameHistory(@RequestAttribute("userId") String userId) {
+    var history = gameService.retrieveGameHistory(userId);
+    final GameHistoryResponse gameHistoryResponse = GameHistoryResponse.builder()
+      .wins(history.getKey().stream().map(gameMapper::toGameResultResponse).toList())
+      .losses(history.getValue().stream().map(gameMapper::toGameResultResponse).toList())
+      .build();
+    return HttpResponse.ok(gameHistoryResponse);
   }
 }

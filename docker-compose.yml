@@ -14,7 +14,8 @@ services:
       - redis
 
   mongo:
-    image: mongo:7.0.12
+    image: mongodb/mongodb-enterprise-server:7.0-ubi9
+    user: root
     container_name: mongo
     restart: unless-stopped
     env_file: .env
@@ -24,7 +25,6 @@ services:
       - MONGO_INITDB_DATABASE=${DB_NAME}
     ports:
       - '${DB_PORT}:27017'
-    command: mongod --bind_ip_all
     volumes:
       - ./.extra/setup/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
       - dbdata:/data/db

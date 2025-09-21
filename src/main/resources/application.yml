@@ -13,6 +13,11 @@ micronaut:
       url: https://auth.project-snake.win
       issuer: "https://auth.project-snake.win"
 
+mongodb:
+  servers:
+    default:
+      uri: "mongodb://${DB_USER}:${DB_USER_PWD}@localhost:27017/project-snake?retryWrites=false"
+
 kinde:
   client-url: ${KINDE_HOST}
   client-id: ${KINDE_CLIENT_ID}

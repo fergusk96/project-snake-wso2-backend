@@ -19,10 +19,12 @@ public class GameExecutionServiceImplementation implements GameExecutionService 
 
   private final Clock clock;
   private final UserService userService;
+  private final GameService gameService;
 
-  public GameExecutionServiceImplementation(final Clock clock, final UserService userService) {
+  public GameExecutionServiceImplementation(final Clock clock, final UserService userService, final GameService gameService) {
     this.clock = clock;
     this.userService = userService;
+    this.gameService = gameService;
   }
 
   @Override
@@ -41,7 +43,8 @@ public class GameExecutionServiceImplementation implements GameExecutionService 
       .playerOneId(userOne.getId())
       .playerTwoId(userTwo.getId())
       .build();
-    // TODO Persist game result if needed
+
+    gameService.saveGame(gameResult);
     log.info("Game executed: {}", gameResult);
     return gameResult;
   }
